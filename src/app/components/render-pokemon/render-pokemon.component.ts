@@ -52,7 +52,7 @@ export class RenderPokemonComponent implements OnInit {
           this.isLoading = true;
         }
       );
-    }, 0);
+    }, 1200);
   }
 
   nextPage() {
