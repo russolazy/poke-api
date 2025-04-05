@@ -14,9 +14,10 @@
     flex-direction: column;
     animation: slideDown 0.5s ease 1;
     background-color: white;
+    cursor: pointer;
 
-    .pokemon-image:hover {
-      transform: scale(1.1);
+    .pokemon-image {
+      animation: scalePokemon 1s ease infinite;
     }
 
     .about-pokemon {
@@ -87,6 +88,18 @@
   }
 }
 
+@keyframes scalePokemon {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: translate(1);
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .container {
     grid-template-columns: repeat(3, 1fr);
@@ -102,5 +115,17 @@
 @media screen and (max-width: 790px) {
   .container {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    display: flex;
+    overflow-x: auto;
+
+    .pokemons {
+      width: 100%;
+      min-width: 200px;
+    }
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { PokeApiService } from 'src/app/services/pokemon/poke-api.service';
 
 @Component({
@@ -7,7 +8,8 @@ import { PokeApiService } from 'src/app/services/pokemon/poke-api.service';
   styleUrls: ['./render-pokemon.component.scss'],
 })
 export class RenderPokemonComponent implements OnInit {
-  constructor(private _pokemon: PokeApiService) {}
+  constructor(private _pokemon: PokeApiService, private router: Router) {}
+  @Output() selectPokemon: EventEmitter<any> = new EventEmitter<any>();
 
   pokemons: any[] = [];
   searchTerm: string = '';
@@ -37,6 +39,8 @@ export class RenderPokemonComponent implements OnInit {
               .subscribe((details) => {
                 this.pokemons.push(details);
                 this.filteredPokemons = [...this.pokemons];
+
+                console.log(this.filteredPokemons);
 
                 this.totalPages = Math.ceil(res.count / this.limit);
                 this.isLoading = false;
@@ -92,6 +96,13 @@ export class RenderPokemonComponent implements OnInit {
       default:
         return 'black';
     }
+  }
+
+  displayPokemonDetails(pokemon: any) {
+    console.log('Selected Pokémon:', pokemon);
+    console.log('Pokémon ID:', pokemon);
+
+    this.selectPokemon.emit(pokemon);
   }
 
   onSearch() {

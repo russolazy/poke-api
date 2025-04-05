@@ -1,12 +1,13 @@
-<router-outlet>
-  <app-header></app-header>
-  <div class="render-pokemon">
-    <div>
-      <app-render-pokemon></app-render-pokemon>
-    </div>
-
-    <div>
-      <app-display-pokemon-details></app-display-pokemon-details>
-    </div>
+<app-header></app-header>
+<div class="render-pokemon">
+  <div>
+    <app-render-pokemon
+      (selectPokemon)="handleSelectPokemon($event)"
+    ></app-render-pokemon>
   </div>
-</router-outlet>
+  <div *ngIf="selectedPokemon">
+    <app-display-pokemon-details
+      [pokemon]="selectedPokemon"
+    ></app-display-pokemon-details>
+  </div>
+</div>

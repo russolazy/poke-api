@@ -19,4 +19,8 @@ export class PokeApiService {
   getSpecificPokemonDetails(url: string): Observable<any> {
     return this.HTTP.get(url);
   }
+
+  getSpecificPokemonDetailsId(id: number): Observable<any> {
+    return this.HTTP.get(`${this.pokeAPI}pokemon/${id}`);
+  }
 }

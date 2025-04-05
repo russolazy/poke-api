@@ -1,1 +1,65 @@
-<div class="container">display-pokemon-details-works!</div>
+<div class="container">
+  <div class="pokemon-info">
+    <div class="image">
+      <img
+        [src]="pokemonDetails.sprites['front_default']"
+        alt="{{ pokemonDetails.name }}"
+      />
+    </div>
+
+    <div class="details">
+      <h2>{{ pokemonDetails.name }}</h2>
+
+      <div>
+        <!-- Pokemon ID -->
+        <div class="detail">
+          <strong>Pokémon ID:</strong>
+          <span>{{ pokemonDetails.id.toString().padStart(3, "0") }}</span>
+        </div>
+
+        <!-- Pokémon Height and Weight -->
+        <div class="detail">
+          <strong>Height:</strong>
+          <span>{{ pokemonDetails.height }}m</span>
+        </div>
+        <div class="detail">
+          <strong>Weight:</strong>
+          <span>{{ pokemonDetails.weight }}kg</span>
+        </div>
+
+        <!-- Base Experience -->
+        <div class="detail">
+          <strong>Base Experience:</strong>
+          <span>{{ pokemonDetails.base_experience }}</span>
+        </div>
+
+        <!-- Types -->
+        <div class="detail">
+          <strong>Types:</strong>
+          <span *ngFor="let types of pokemonDetails.types; let last = last">
+            {{ types.type.name }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+
+        <!-- Abilities -->
+        <div class="detail" *ngIf="pokemonDetails.abilities?.length">
+          <strong>Abilities:</strong>
+          <span
+            *ngFor="let ability of pokemonDetails.abilities; let last = last"
+          >
+            {{ ability.ability.name }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Additional Stats -->
+      <div class="stats">
+        <h3>Stats:</h3>
+        <div *ngFor="let stat of pokemonDetails.stats">
+          <strong>{{ stat.stat.name }}:</strong>
+          <span>{{ stat.base_stat }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,7 @@
       *ngFor="let pokemon of filteredPokemons"
       class="pokemons"
       [ngStyle]="{ 'border-color': getBorderColor(pokemon.types) }"
+      (click)="displayPokemonDetails(pokemon.id)"
     >
       <img
         [src]="pokemon.sprites?.front_default || 'assets/default-sprite.png'"
@@ -25,8 +26,8 @@
         <div class="pokemon-traits">
           <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
           <div class="pokemon-physical">
-            <p>Height: {{ pokemon.height }}</p>
-            <p>Weight: {{ pokemon.weight }}</p>
+            <p>Height: {{ pokemon.height }}m</p>
+            <p>Weight: {{ pokemon.weight }}kg</p>
           </div>
         </div>
 
