@@ -1,0 +1,32 @@
+.render-pokemon {
+  margin-top: 20px;
+  padding: 1em;
+  display: flex;
+  gap: 10px;
+
+  div:nth-child(1) {
+    flex: 1;
+  }
+
+  div:nth-child(2) {
+    flex: 0.7;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .render-pokemon {
+    div:nth-child(1) {
+      flex: 1;
+    }
+
+    div:nth-child(2) {
+      flex: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .render-pokemon {
+    flex-direction: column;
+  }
+}

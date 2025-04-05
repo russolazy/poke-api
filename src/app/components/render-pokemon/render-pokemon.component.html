@@ -1,0 +1,51 @@
+<div class="">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search Pokémon..."
+    [(ngModel)]="searchTerm"
+    (input)="onSearch()"
+  />
+</div>
+
+<div class="container">
+  <ng-container *ngIf="!isLoading">
+    <div
+      *ngFor="let pokemon of filteredPokemons"
+      class="pokemons"
+      [ngStyle]="{ 'border-color': getBorderColor(pokemon.types) }"
+    >
+      <img
+        [src]="pokemon.sprites?.front_default || 'assets/default-sprite.png'"
+        alt="{{ pokemon.name }}"
+        class="pokemon-image"
+      />
+
+      <div class="about-pokemon">
+        <div class="pokemon-traits">
+          <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+          <div class="pokemon-physical">
+            <p>Height: {{ pokemon.height }}</p>
+            <p>Weight: {{ pokemon.weight }}</p>
+          </div>
+        </div>
+
+        <div class="pokemon-types">
+          <span>Types:</span>
+          <p *ngFor="let type of pokemon.types">{{ type.type.name }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="loading" *ngIf="isLoading">
+  <span>Loading pokemons...</span>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div class="pagination">
+  <p>Total Pages: {{ currentPage }} of {{ totalPages }}</p>
+  <button (click)="prevPage()">Prev</button>
+  <button (click)="nextPage()">Next</button>
+</div>

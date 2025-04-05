@@ -1,0 +1,106 @@
+.container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  .pokemons {
+    padding: 1em;
+    border: 2px solid gray;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: slideDown 0.5s ease 1;
+    background-color: white;
+
+    .pokemon-image:hover {
+      transform: scale(1.1);
+    }
+
+    .about-pokemon {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+
+      .pokemon-traits {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .pokemon-name {
+          font-size: 22px;
+        }
+
+        .pokemon-physical {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+        }
+      }
+
+      .pokemon-types {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+  }
+
+  .loading {
+    width: 50%;
+    text-align: center;
+    margin: 10px;
+  }
+}
+
+.pagination {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+
+  button {
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(58, 187, 107);
+    color: white;
+  }
+
+  button:disabled {
+    background-color: gray;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
