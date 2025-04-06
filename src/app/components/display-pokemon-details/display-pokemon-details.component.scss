@@ -1,21 +1,138 @@
 .container {
-  border: 1px solid gray;
-  height: 100%;
+  box-shadow: 0 0 10px rgb(224, 224, 224);
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 
-  .pokemon-info {
+  .pokemon-bg {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 35%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    width: 100%;
+
+    .pokemon-sprite {
+      display: flex;
+      justify-content: center;
+      img {
+        height: 250px;
+        width: 250px;
+        object-fit: cover;
+      }
+    }
+
+    .pokemon-id {
+      padding: 1em;
+
+      strong,
+      span {
+        font-size: 22px;
+        color: white;
+      }
+    }
+  }
+
+  .pokemon-data {
+    .pokemon-name {
+      text-align: center;
+      margin: 10px 0;
+      font-size: clamp(14px, 1rem + 1vw, 34px);
+      font-weight: bold;
+      color: #333;
+    }
+
+    .pokemon-traits {
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .trait-1,
+      .trait-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+    }
+  }
+
+  .pokemon-stats {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+    margin-top: 20px;
+    gap: 10px;
+
+    .stat-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      strong {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    .icon {
+      height: 20px;
+    }
+  }
+
+  .loading {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    padding: 1em;
 
-    img {
+    .pokeball {
       height: 200px;
+      animation: catchShake 1.5s ease infinite;
     }
+  }
+}
 
-    .details {
-    }
+@keyframes catchShake {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-20deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  45% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .pokemon-stats {
+    flex-direction: column;
+    justify-content: end;
+    flex-wrap: nowrap;
   }
 }

@@ -1,65 +1,118 @@
 <div class="container">
-  <div class="pokemon-info">
-    <div class="image">
-      <img
-        [src]="pokemonDetails.sprites['front_default']"
-        alt="{{ pokemonDetails.name }}"
-      />
-    </div>
-
-    <div class="details">
-      <h2>{{ pokemonDetails.name }}</h2>
-
-      <div>
-        <!-- Pokemon ID -->
-        <div class="detail">
-          <strong>Pokémon ID:</strong>
-          <span>{{ pokemonDetails.id.toString().padStart(3, "0") }}</span>
-        </div>
-
-        <!-- Pokémon Height and Weight -->
-        <div class="detail">
-          <strong>Height:</strong>
-          <span>{{ pokemonDetails.height }}m</span>
-        </div>
-        <div class="detail">
-          <strong>Weight:</strong>
-          <span>{{ pokemonDetails.weight }}kg</span>
-        </div>
-
-        <!-- Base Experience -->
-        <div class="detail">
-          <strong>Base Experience:</strong>
-          <span>{{ pokemonDetails.base_experience }}</span>
-        </div>
-
-        <!-- Types -->
-        <div class="detail">
-          <strong>Types:</strong>
-          <span *ngFor="let types of pokemonDetails.types; let last = last">
-            {{ types.type.name }}<span *ngIf="!last">, </span>
-          </span>
-        </div>
-
-        <!-- Abilities -->
-        <div class="detail" *ngIf="pokemonDetails.abilities?.length">
-          <strong>Abilities:</strong>
-          <span
-            *ngFor="let ability of pokemonDetails.abilities; let last = last"
-          >
-            {{ ability.ability.name }}<span *ngIf="!last">, </span>
-          </span>
-        </div>
+  <ng-container *ngIf="!isLoading; else loading">
+    <div class="pokemon-bg">
+      <div class="pokemon-id">
+        <strong>#</strong>
+        <span> {{ pokemonDetails.id.toString().padStart(3, "0") }} </span>
       </div>
 
-      <!-- Additional Stats -->
-      <div class="stats">
-        <h3>Stats:</h3>
-        <div *ngFor="let stat of pokemonDetails.stats">
-          <strong>{{ stat.stat.name }}:</strong>
-          <span>{{ stat.base_stat }}</span>
+      <div class="pokemon-sprite">
+        <img
+          [src]="pokemonDetails.sprites.other['official-artwork'].front_default"
+          alt="{{ pokemonDetails.name }}"
+        />
+      </div>
+    </div>
+
+    <div class="pokemon-data">
+      <div class="pokemon-name">
+        {{ pokemonDetails.name | titlecase }}
+      </div>
+
+      <div class="pokemon-traits">
+        <div class="trait-1">
+          <div>
+            <strong>Height:</strong>{{ " " + pokemonDetails.height / 10 }}m
+          </div>
+          <div>
+            <strong>Weight:</strong>{{ " " + pokemonDetails.weight / 10 }}kg
+          </div>
+        </div>
+
+        <div class="trait-2">
+          <div>
+            <strong>Base Experience:</strong
+            >{{ " " + pokemonDetails.base_experience }}XP
+          </div>
+
+          <div>
+            <strong>Types:</strong>
+            <span *ngFor="let types of pokemonDetails.types; let last = last">
+              {{ types.type.name | titlecase }}<span *ngIf="!last">, </span>
+            </span>
+          </div>
+
+          <div>
+            <strong>Abilities:</strong>
+            <span
+              *ngFor="let ability of pokemonDetails.abilities; let last = last"
+            >
+              {{ ability.ability.name }}<span *ngIf="!last">, </span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="pokemon-stats">
+      <div *ngFor="let stat of pokemonDetails.stats" class="stat-item">
+        <strong>
+          <ng-container [ngSwitch]="stat.stat.name">
+            <img
+              *ngSwitchCase="'hp'"
+              src="assets/images/Hospital.png"
+              alt="HP Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchCase="'attack'"
+              src="assets/images/Sword.png"
+              alt="Attack Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchCase="'defense'"
+              src="assets/images/Microsoft Admin.png"
+              alt="Defense Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchCase="'special-attack'"
+              src="assets/images/Attack.png"
+              alt="Special Attack Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchCase="'special-defense'"
+              src="assets/images/Knight Shield.png"
+              alt="Special Defense Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchCase="'speed'"
+              src="assets/images/Wind.png"
+              alt="Speed Icon"
+              class="icon"
+            />
+            <img
+              *ngSwitchDefault
+              src="assets/images/Wind.png"
+              alt="Default Icon"
+              class="icon"
+            />
+          </ng-container>
+          {{ stat.stat.name | titlecase }}:
+        </strong>
+        <span> {{ stat.base_stat }}</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading">
+      <audio #pokeAudio src="assets/paudio.mp3" autoplay></audio>
+      <img class="pokeball" src="assets/images/pokeball.png" alt="" />
+      <p>Loading pokemon data...</p>
+    </div>
+  </ng-template>
 </div>
