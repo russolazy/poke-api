@@ -17,6 +17,12 @@
     <div class="pokemon-data">
       <div class="pokemon-name">
         {{ pokemonDetails.name | titlecase }}
+        <audio
+          *ngIf="pokemonDetails"
+          [src]="pokemonDetails.cries.latest || pokemonDetails.cries.legacy"
+          autoplay
+          #pokeCryAudio
+        ></audio>
       </div>
 
       <div class="pokemon-traits">
@@ -107,10 +113,15 @@
       </div>
     </div>
   </ng-container>
-
   <ng-template #loading>
     <div class="loading">
-      <audio #pokeAudio src="assets/paudio.mp3" autoplay></audio>
+      <audio
+        #pokeAudio
+        src="assets/paudio.mp3"
+        autoplay
+        (ended)="playCry()"
+      ></audio>
+
       <img class="pokeball" src="assets/images/pokeball.png" alt="" />
       <p>Loading pokemon data...</p>
     </div>

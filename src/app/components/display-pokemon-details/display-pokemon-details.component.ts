@@ -14,13 +14,13 @@ export class DisplayPokemonDetailsComponent implements OnChanges {
   isLoading: boolean = false;
 
   ngOnChanges(): void {
-    console.log('Display Component, pokemon:', this.pokemon);
+    //console.log('Display Component, pokemon:', this.pokemon);
 
     this.isLoading = true;
 
     this._pokemon.getSpecificPokemonDetailsId(this.pokemon).subscribe(
       (res) => {
-        console.log('API Response: ', res);
+        // console.log('API Response: ', res);
 
         this.pokemonDetails = res;
 
@@ -32,5 +32,14 @@ export class DisplayPokemonDetailsComponent implements OnChanges {
         console.error('API Error: ', err);
       }
     );
+  }
+
+  playCry() {
+    const pokeCryAudio = document.querySelector(
+      'audio#pokeCryAudio'
+    ) as HTMLAudioElement;
+    if (pokeCryAudio) {
+      pokeCryAudio.play();
+    }
   }
 }

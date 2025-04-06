@@ -21,6 +21,7 @@ export class RenderPokemonComponent implements OnInit {
   totalPages: number = 0;
 
   isLoading: boolean = false;
+  isClicked: boolean = false;
 
   ngOnInit(): void {
     this.loadPokemons();
@@ -40,7 +41,7 @@ export class RenderPokemonComponent implements OnInit {
                 this.pokemons.push(details);
                 this.filteredPokemons = [...this.pokemons];
 
-                console.log(this.filteredPokemons);
+                //console.log(this.filteredPokemons);
 
                 this.totalPages = Math.ceil(res.count / this.limit);
                 this.isLoading = false;
@@ -99,10 +100,16 @@ export class RenderPokemonComponent implements OnInit {
   }
 
   displayPokemonDetails(pokemon: any) {
-    console.log('Selected Pokémon:', pokemon);
-    console.log('Pokémon ID:', pokemon);
+    this.isClicked = true;
+
+    // console.log('Selected Pokémon:', pokemon);
+    // console.log('Pokémon ID:', pokemon);
 
     this.selectPokemon.emit(pokemon);
+
+    setTimeout(() => {
+      this.isClicked = false;
+    }, 4000);
   }
 
   onSearch() {

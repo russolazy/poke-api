@@ -15,6 +15,7 @@
       class="pokemons"
       [ngStyle]="{ 'border-color': getBorderColor(pokemon.types) }"
       (click)="displayPokemonDetails(pokemon.id)"
+      [class.disabled]="isClicked"
     >
       <img
         [src]="pokemon.sprites?.front_default || 'assets/default-sprite.png'"

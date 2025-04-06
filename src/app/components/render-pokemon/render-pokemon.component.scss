@@ -52,6 +52,11 @@
     }
   }
 
+  .pokemons.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
   .loading {
     width: 50%;
     text-align: center;
